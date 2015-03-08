@@ -3,12 +3,6 @@ package serenity;
 use Moose;
 use File::Slurp;
 
-sub create_final_content_file {
-	(my $this, my $title) = @_;
-	 
-	
-}
-
 sub get_page_by_name($$) {
 	(my $this, my $type, my $page_name) = @_;
 	die "\$type was undefined at get_page_by_name $!" unless $type;

@@ -7,11 +7,26 @@
 		<script src="/public/bootstrap/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<form action=/create method="POST">
-			<p>Page Name : <input type="text" name="pagename"></input></p>
-			<p>Page Content in Markdown : </p>
-			<p><textarea name="pagecontent" rows="24" cols="78"></textarea></p>
-			<p><button type="submit" class="btn btn-primary">submit</button></p>
-		</form>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      		<div class="container">
+          		<a class="navbar-brand" href="#">Serenity Wiki</a>
+        	</div>
+    	</nav>
+    	
+    	<div class="container" style="padding-top: 70px;">
+			<form class="form-horizontal" action=/create method="POST">
+				<div class="form-group">					
+					<div class="col-lg-12">
+						<input type="text" name="pagename" class="form-control" placeholder="Page Name" ></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12">						
+						<textarea name="pagecontent" class="form-control" placeholder="Page Content in Markdown"></textarea>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">submit</button>
+			</form>
+		</div>
 	</body>
 </html>

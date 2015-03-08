@@ -4,34 +4,47 @@ use Dancer2;
 use serenity;
 
 my $wiki_manager = serenity->new;
+
+sub set_status_and_return_content {
+	status $_[0];
+	$_[1];	
+}
+
 get '/page/:name' => sub {
 	(my $status_code, my $content) =  $wiki_manager->get_content_page_by_name( params->{name} );
-	status $status_code;
-	return $content;
+	set_status_and_return_content($status_code, $content);
 };
 
 get '/' => sub {
 	(my $status_code, my $content) = $wiki_manager->get_system_page_by_name( "welcome" );
-	status $status_code;
-	return $content;
+	set_status_and_return_content($status_code, $content);
 };
 
 get '/create' => sub {
 	(my $status_code, my $content) = $wiki_manager->get_system_page_by_name( "create_page" );
-        status $status_code;
-        return $content;
+    set_status_and_return_content($status_code, $content);
 };
 
 post '/create' => sub {
-	(my $status_code, my $content) = $wiki_manager->create_page_for_name( params->{pagename}, "markdown", params->{pagecontent} );
-	status $status_code;
-	print "$status_code , $content";
-        return $content;
+	my $page_name = params->{pagename};
+	my $page_content = params->{pagecontent};
+	(my $status_code, my $content) = $wiki_manager->create_page_for_name( $page_name, "markdown", $page_content );
+	if( $status_code == 200) {
+		redirect "/page/" . $page_name;
+	} else {
+		$wiki_manager->get_system_page_by_name( "500" );
+	}
+};
+
+get qr{/public/(\S*)} => sub {
+	(my $static_file_name) = splat;
+    send_file $static_file_name;
 };
 
 get '/*' => sub {
 	(my $status_code, my $content) = $wiki_manager->get_system_page_by_name( "404" );
-        status $status_code;
-        return $content;
+     set_status_and_return_content($status_code, $content);
 };
+
+
 dance;

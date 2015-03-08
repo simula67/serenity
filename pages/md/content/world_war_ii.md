@@ -1,1 +1,0 @@
-Fought by brave dudes

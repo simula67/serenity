@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-package serenity;
+package Serenity;
 use Moose;
 use File::Slurp;
 

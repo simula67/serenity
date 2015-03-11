@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 
+use lib 'lib';
 use Dancer2;
-use serenity;
+use Serenity;
 
-my $wiki_manager = serenity->new;
+my $wiki_manager = Serenity->new;
 
 sub set_status_and_return_content {
 	status $_[0];

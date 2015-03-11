@@ -1,11 +1,10 @@
 #!/usr/bin/perl -w
 use strict;
-
-use serenity;
+use lib 'lib';
+use Serenity;
 use Test::Simple tests => 3;
 use File::Slurp;
-
-my $serenity = serenity->new();
+my $serenity = Serenity->new();
 (my $status_code, my $received_html) = $serenity->get_system_page_by_name( 'welcome' );
 ok( 200 == $status_code , "Status code 200");
 my $expected_html = <<'EOF';
@@ -20,7 +19,7 @@ my $expected_html = <<'EOF';
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
       		<div class="container">
-          		<a class="navbar-brand" href="#">Serenity Wiki</a>
+          		<a class="navbar-brand" href="/">Serenity Wiki</a>
         	</div>
     	</nav>
     	
